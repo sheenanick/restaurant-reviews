@@ -7,7 +7,8 @@ import { Review } from './review.model';
   template: `
   <div class="container">
     <h1 class="text-center">Restaurant Reviews App</h1>
-    <new-restaurant (newRestaurantSender)="addRestaurant($event)"></new-restaurant>
+    <button class="btn btn-success" (click)="newRestaurantForm()">Add New Restaurant</button>
+    <new-restaurant [newRestaurant]="newRestaurant" (newRestaurantSender)="addRestaurant($event)"></new-restaurant>
     <div class="row">
       <div class="col-xs-6">
         <restaurant-list [childRestaurantList]="masterRestaurantList" (selectedRestaurantSender)="showDetails($event)" (editRestaurantSender)="editRestaurant($event)"></restaurant-list>
@@ -28,8 +29,10 @@ export class AppComponent {
   public selectedRestaurant: Restaurant = null;
   public selectedRestaurantForReview: Restaurant = null;
   public selectedRestaurantForEdit: Restaurant = null;
+  public newRestaurant: boolean = false;
   addRestaurant(newRestaurantFromChild: Restaurant) {
     this.masterRestaurantList.push(newRestaurantFromChild);
+    this.newRestaurant = false;
   }
   showDetails(selectedRestaurantFromChild: Restaurant) {
     this.selectedRestaurant = selectedRestaurantFromChild;
@@ -55,5 +58,8 @@ export class AppComponent {
   }
   doneClicked(restaurantFromChild: Restaurant) {
     this.selectedRestaurantForEdit = null;
+  }
+  newRestaurantForm() {
+    this.newRestaurant = true;
   }
 }
