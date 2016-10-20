@@ -1,16 +1,21 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import { Restaurant } from './restaurant.model';
+
 
 @Component({
   selector: 'restaurant-list',
   template: `
     <h3>All Restaurants</h3>
     <div *ngFor="let currentRestaurant of childRestaurantList">
-      <h4>{{ currentRestaurant.name }}</h4>
+      <h4 (click)="showClicked(currentRestaurant)">{{ currentRestaurant.name }}</h4>
     </div>
   `
 })
 
 export class RestaurantListComponent {
   @Input() childRestaurantList: Restaurant[];
+  @Output() selectedRestaurantSender = new EventEmitter();
+  showClicked(currentRestaurant: Restaurant){
+    this.selectedRestaurantSender.emit(currentRestaurant);
+  }
 }

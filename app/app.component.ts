@@ -1,21 +1,45 @@
 import { Component } from '@angular/core';
 import { Restaurant } from './restaurant.model';
+import { Review } from './review.model';
 
 @Component({
   selector: 'my-app',
   template: `
   <div class="container">
     <h1 class="text-center">Restaurant Reviews App</h1>
-    <new-restaurant (newRestaurantSender)="addTask($event)"></new-restaurant>
-    <restaurant-list [childRestaurantList]="masterRestaurantList"></restaurant-list>
+    <new-restaurant (newRestaurantSender)="addRestaurant($event)"></new-restaurant>
+    <div class="row">
+      <div class="col-xs-6">
+        <restaurant-list [childRestaurantList]="masterRestaurantList" (selectedRestaurantSender)="showDetails($event)"></restaurant-list>
+      </div>
+      <div class="col-xs-6">
+        <div *ngIf="selectedRestaurant">
+          <restaurant-display [selectedRestaurant]="selectedRestaurant" (addReviewSender)="showReviewForm($event)"></restaurant-display>
+        </div>
+        <div *ngIf="selectedRestaurantForReview">
+          <new-review (newReviewSender)="newReview($event)"></new-review>
+        <div>
+      </div>
+    </div>
   </div>
   `
 })
 
 export class AppComponent {
   public masterRestaurantList: Restaurant[] = [];
-  addTask(newRestaurantFromChild: Restaurant) {
-    console.log(newRestaurantFromChild);
+  public selectedRestaurant: Restaurant = null;
+  public selectedRestaurantForReview: Restaurant = null;
+  addRestaurant(newRestaurantFromChild: Restaurant) {
     this.masterRestaurantList.push(newRestaurantFromChild);
+  }
+  showDetails(selectedRestaurantFromChild: Restaurant) {
+    this.selectedRestaurant = selectedRestaurantFromChild;
+  }
+  showReviewForm(selectedRestaurantFromChild: Restaurant) {
+    this.selectedRestaurantForReview = selectedRestaurantFromChild;
+  }
+  newReview(newReviewFromChild: Review) {
+    this.selectedRestaurantForReview.reviews.push(newReviewFromChild);
+    this.selectedRestaurantForReview = null;
   }
 }

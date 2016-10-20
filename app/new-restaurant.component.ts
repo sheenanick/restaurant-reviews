@@ -4,7 +4,7 @@ import { Restaurant } from './restaurant.model';
 @Component({
   selector: 'new-restaurant',
   template: `
-    <h3>Add a New Restaurant</h3>
+    <h3>Add New Restaurant</h3>
     <div class="form-group">
       <label>Restaurant Name:</label>
       <input class="form-control" #name>
@@ -31,7 +31,7 @@ import { Restaurant } from './restaurant.model';
         <option value="$$$$$">$$$$$</option>
       </select>
     </div>
-    <button class="btn btn-primary" (click)="addClicked(name.value, specialty.value, address.value, phoneNumber.value, price.value); name.value=''; specialty.value=''; address.value=''; phoneNumber.value=''; price.value='';">Add</button>
+    <button class="btn btn-primary" (click)="addClicked(name.value, specialty.value, address.value, phoneNumber.value, price.value); name.value=''; specialty.value=''; address.value=''; phoneNumber.value=''; price.value='$';">Add</button>
   `
 })
 
@@ -39,7 +39,6 @@ export class NewRestaurantComponent {
   @Output() newRestaurantSender = new EventEmitter();
   addClicked(name: string, specialty: string, address: string, phoneNumber: string, price: string) {
     var newRestaurantToAdd: Restaurant = new Restaurant(name, specialty, address, phoneNumber, price);
-    console.log(newRestaurantToAdd);
     this.newRestaurantSender.emit(newRestaurantToAdd);
   }
 }
