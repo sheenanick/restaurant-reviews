@@ -7,7 +7,7 @@ import { Review } from './review.model';
   template: `
   <div class="container">
     <h1 class="text-center">Restaurant Reviews App</h1>
-    <button class="btn btn-success" (click)="newRestaurantForm()">Add New Restaurant</button>
+    <button class="btn btn-primary" (click)="newRestaurantForm()">Add New Restaurant</button>
     <new-restaurant [newRestaurant]="newRestaurant" (newRestaurantSender)="addRestaurant($event)"></new-restaurant>
     <div class="row">
       <div class="col-xs-6">
