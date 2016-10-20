@@ -19,7 +19,7 @@ import { Restaurant } from './restaurant.model';
       <div *ngFor="let review of selectedRestaurant.reviews">
         <h4>{{ review.title }}</h4>
         <p>Rating: {{ review.rating }} out of 5</p>
-        <p>Wait Time: {{ review.waitTime }}</p>
+        <p>Wait Time: {{ review.waitTime }} minutes</p>
         <p>Comments: {{ review.comments }}</p>
       </div>
     </div>

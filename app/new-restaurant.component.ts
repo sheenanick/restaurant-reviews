@@ -11,7 +11,18 @@ import { Restaurant } from './restaurant.model';
     </div>
     <div class="form-group">
       <label>Specialty:</label>
-      <input class="form-control" #specialty>
+      <select class="form-control" #specialty>
+        <option value="Cafe">Cafe</option>
+        <option value="Chinese">Chinese</option>
+        <option value="French">French</option>
+        <option value="Italian">Italian</option>
+        <option value="Japanese">Japanese</option>
+        <option value="Mexican">Mexican</option>
+        <option value="Thai">Thai</option>
+        <option value="Vietnamese">Vietnamese</option>
+        <option value="Vegan">Vegan</option>
+        <option value="Other">Other</option>
+      </select>
     </div>
     <div class="form-group">
       <label>Address:</label>
@@ -21,9 +32,9 @@ import { Restaurant } from './restaurant.model';
       <label>Phone number:</label>
       <input class="form-control" #phoneNumber>
     </div>
-    <div>
+    <div class="form-group">
       <label>Price:</label>
-      <select #price>
+      <select class="form-control" #price>
         <option value="$">$</option>
         <option value="$$">$$</option>
         <option value="$$$">$$$</option>
@@ -31,7 +42,7 @@ import { Restaurant } from './restaurant.model';
         <option value="$$$$$">$$$$$</option>
       </select>
     </div>
-    <button class="btn btn-primary" (click)="addClicked(name.value, specialty.value, address.value, phoneNumber.value, price.value); name.value=''; specialty.value=''; address.value=''; phoneNumber.value=''; price.value='$';">Add</button>
+    <button class="btn btn-primary" (click)="addClicked(name.value, specialty.value, address.value, phoneNumber.value, price.value); name.value=''; specialty.value='Cafe'; address.value=''; phoneNumber.value=''; price.value='$';">Add</button>
   `
 })
 
