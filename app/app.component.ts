@@ -18,7 +18,10 @@ import { Review } from './review.model';
         </div>
         <div *ngIf="selectedRestaurantForReview">
           <new-review (newReviewSender)="newReview($event)"></new-review>
-        <div>
+        </div>
+        <div *ngIf="selectedRestaurant && selectedRestaurant.reviews.length > 0">
+          <review-list [selectedRestaurant]="selectedRestaurant"></review-list>
+        </div>
       </div>
     </div>
   </div>

@@ -10,9 +10,9 @@ import { Review } from './review.model';
       <label>Title:</label>
       <input class="form-control" #title>
     </div>
-    <div>
+    <div class="form-group">
       <label>Rating:</label>
-      <select #rating>
+      <select class="form-control" #rating>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
