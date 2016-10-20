@@ -38,7 +38,7 @@ import { Review } from './review.model';
     @Input() selectedRestaurant: Restaurant;
     @Output() newReviewSender = new EventEmitter();
     addClicked(title: string, rating: number, waitTime: number, comments: string) {
-      var reviewToAdd: Review = new Review(title, +rating, waitTime, comments);
+      var reviewToAdd: Review = new Review(title, +rating, +waitTime, comments);
       this.newReviewSender.emit(reviewToAdd);
     }
   }
