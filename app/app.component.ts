@@ -43,6 +43,18 @@ export class AppComponent {
   }
   newReview(newReviewFromChild: Review) {
     this.selectedRestaurantForReview.reviews.push(newReviewFromChild);
+    var totalRating: number = 0;
+    var totalWaitTime: number = 0;
+    var totalReviews: number = this.selectedRestaurantForReview.reviews.length;
+    for(var i = 0; i < totalReviews; i++) {
+      totalRating += this.selectedRestaurantForReview.reviews[i].rating;
+      totalWaitTime += this.selectedRestaurantForReview.reviews[i].waitTime;
+    }
+    this.selectedRestaurantForReview.avgWaitTime = totalWaitTime / totalReviews;
+    this.selectedRestaurantForReview.avgRating = totalRating / totalReviews;
     this.selectedRestaurantForReview = null;
+  }
+  calculateAverage(Restaurant: Restaurant) {
+
   }
 }
