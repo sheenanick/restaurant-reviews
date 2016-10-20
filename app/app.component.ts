@@ -10,18 +10,13 @@ import { Review } from './review.model';
     <new-restaurant (newRestaurantSender)="addRestaurant($event)"></new-restaurant>
     <div class="row">
       <div class="col-xs-6">
-        <restaurant-list [childRestaurantList]="masterRestaurantList" (selectedRestaurantSender)="showDetails($event)"></restaurant-list>
+        <restaurant-list [childRestaurantList]="masterRestaurantList" (selectedRestaurantSender)="showDetails($event)" (editRestaurantSender)="editRestaurant($event)"></restaurant-list>
+        <edit-restaurant [selectedRestaurant]="selectedRestaurantForEdit" (doneClickedSender)="doneClicked($event)"></edit-restaurant>
       </div>
       <div class="col-xs-6">
-        <div *ngIf="selectedRestaurant">
-          <restaurant-display [selectedRestaurant]="selectedRestaurant" (addReviewSender)="showReviewForm($event)"></restaurant-display>
-        </div>
-        <div *ngIf="selectedRestaurantForReview">
-          <new-review (newReviewSender)="newReview($event)"></new-review>
-        </div>
-        <div *ngIf="selectedRestaurant && selectedRestaurant.reviews.length > 0">
-          <review-list [selectedRestaurant]="selectedRestaurant"></review-list>
-        </div>
+        <restaurant-display [selectedRestaurant]="selectedRestaurant" (addReviewSender)="showReviewForm($event)"></restaurant-display>
+        <new-review [selectedRestaurant]="selectedRestaurantForReview" (newReviewSender)="newReview($event)"></new-review>
+        <review-list [selectedRestaurant]="selectedRestaurant"></review-list>
       </div>
     </div>
   </div>
@@ -32,6 +27,7 @@ export class AppComponent {
   public masterRestaurantList: Restaurant[] = [];
   public selectedRestaurant: Restaurant = null;
   public selectedRestaurantForReview: Restaurant = null;
+  public selectedRestaurantForEdit: Restaurant = null;
   addRestaurant(newRestaurantFromChild: Restaurant) {
     this.masterRestaurantList.push(newRestaurantFromChild);
   }
@@ -54,7 +50,10 @@ export class AppComponent {
     this.selectedRestaurantForReview.avgRating = totalRating / totalReviews;
     this.selectedRestaurantForReview = null;
   }
-  calculateAverage(Restaurant: Restaurant) {
-
+  editRestaurant(restaurantFromChild: Restaurant) {
+    this.selectedRestaurantForEdit = restaurantFromChild;
+  }
+  doneClicked(restaurantFromChild: Restaurant) {
+    this.selectedRestaurantForEdit = null;
   }
 }

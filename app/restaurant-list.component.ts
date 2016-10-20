@@ -26,7 +26,7 @@ import { Restaurant } from './restaurant.model';
       <h4><em>No Restaurants</em></h4>
     </div>
     <div *ngFor="let currentRestaurant of childRestaurantList | filter:filterBy">
-      <h4 (click)="showClicked(currentRestaurant)">{{ currentRestaurant.name }}</h4>
+      <h4 (click)="showClicked(currentRestaurant)">{{ currentRestaurant.name }} <button class="btn btn-default btn-sm" (click)="editClicked(currentRestaurant); $event.stopPropagation()">Edit</button></h4>
     </div>
   `
 })
@@ -36,6 +36,10 @@ export class RestaurantListComponent {
   @Output() selectedRestaurantSender = new EventEmitter();
   showClicked(currentRestaurant: Restaurant){
     this.selectedRestaurantSender.emit(currentRestaurant);
+  }
+  @Output() editRestaurantSender = new EventEmitter();
+  editClicked(currentRestaurant: Restaurant){
+    this.editRestaurantSender.emit(currentRestaurant);
   }
   public filterBy: string = 'All';
   onChangeFilter(optionFromMenu) {
